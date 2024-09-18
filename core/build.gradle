@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.library'
-    id("maven-publish")
 }
 
 android {
@@ -30,12 +29,6 @@ android {
         buildConfig = true
     }
 
-    publishing {
-        singleVariant('release') {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
     lint {
         abortOnError true
         baseline file('lint-baseline.xml')
