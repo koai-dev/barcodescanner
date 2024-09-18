@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.koai-dev'
-version = '1.0.1'
+version = '1.0.2'
 
 android {
     compileSdk 34
@@ -46,7 +46,8 @@ android {
 }
 
 dependencies {
-    api(project(":core"))
+    implementation libraries.support_v4
+//    api(project(":core"))
     api(libraries.zxing_core)
 }
 
@@ -57,7 +58,7 @@ afterEvaluate {
             release(MavenPublication) {
                 groupId = 'com.koai-dev'
                 artifactId = 'zxing'
-                version = '1.0.1'
+                version = '1.0.2'
 
                 afterEvaluate {
                     from components.release
@@ -69,7 +70,7 @@ afterEvaluate {
 
 task createReleaseTag {
     doLast {
-        def tagName = "1.0.1"
+        def tagName = "1.0.2"
         try {
             exec {
                 commandLine("git", "tag", "-a", tagName, "-m", "Release tag $tagName")
