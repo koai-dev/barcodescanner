@@ -1,11 +1,45 @@
-apply plugin: 'com.android.library'
+plugins {
+    id 'com.android.library'
+    id("maven-publish")
+}
 
-ext {
-    isLibrary = true
-    pomPackaging = "aar"
-    pomArtifactId = "core"
-    pomName = "Barcode Scanner View"
-    pomDescription = 'An android library project which contains the core barcode scanner view'
+android {
+    compileSdk 34
+
+    defaultConfig {
+        minSdkVersion 21
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+    lint {
+        abortOnError true
+        baseline file('lint-baseline.xml')
+    }
 }
 
 dependencies {
